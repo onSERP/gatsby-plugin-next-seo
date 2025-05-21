@@ -354,6 +354,28 @@ export interface BaseSeoProps {
   nofollow?: boolean;
 
   /**
+   * Sets the maximum image preview size for the search results page.
+   * @see https://developers.google.com/search/docs/crawling-indexing/robots-meta-tag
+   *
+   * @remark
+   *
+   * **Example:**
+   *
+   *  * ```jsx
+   * import React from 'react';
+   * import { GatsbySeo } from 'gatsby-plugin-next-seo';
+   *
+   * export default () => (
+   *   <>
+   *     <GatsbySeo maxImagePreview='large' />
+   *   </>
+   * );
+   * ```
+   *
+   */
+  maxImagePreview?: 'none' | 'standard' | 'large';
+
+  /**
    * Set the page meta description.
    */
   description?: string;

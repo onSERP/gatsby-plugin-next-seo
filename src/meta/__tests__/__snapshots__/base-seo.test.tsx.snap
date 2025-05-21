@@ -7,12 +7,12 @@ exports[`Article SEO renders correctly 1`] = `
       Article Page Title
     </title>
     <meta
-      content="index,follow"
+      content="max-image-preview:large,index,follow"
       data-rh="true"
       name="robots"
     />
     <meta
-      content="index,follow"
+      content="max-image-preview:large,index,follow"
       data-rh="true"
       name="googlebot"
     />
@@ -155,12 +155,12 @@ exports[`Book SEO renders correctly 1`] = `
       Book Page Title
     </title>
     <meta
-      content="index,follow"
+      content="max-image-preview:large,index,follow"
       data-rh="true"
       name="robots"
     />
     <meta
-      content="index,follow"
+      content="max-image-preview:large,index,follow"
       data-rh="true"
       name="googlebot"
     />
@@ -293,12 +293,12 @@ exports[`Profile SEO renders correctly 1`] = `
       Profile Page Title
     </title>
     <meta
-      content="index,follow"
+      content="max-image-preview:large,index,follow"
       data-rh="true"
       name="robots"
     />
     <meta
-      content="index,follow"
+      content="max-image-preview:large,index,follow"
       data-rh="true"
       name="googlebot"
     />
@@ -421,12 +421,12 @@ exports[`Video SEO renders correctly 1`] = `
       Video Page Title
     </title>
     <meta
-      content="index,follow"
+      content="max-image-preview:large,index,follow"
       data-rh="true"
       name="robots"
     />
     <meta
-      content="index,follow"
+      content="max-image-preview:large,index,follow"
       data-rh="true"
       name="googlebot"
     />
@@ -623,12 +623,12 @@ exports[`renders correctly 1`] = `
       rel="canonical"
     />
     <meta
-      content="index,follow"
+      content="max-image-preview:large,index,follow"
       data-rh="true"
       name="robots"
     />
     <meta
-      content="index,follow"
+      content="max-image-preview:large,index,follow"
       data-rh="true"
       name="googlebot"
     />

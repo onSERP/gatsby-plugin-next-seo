@@ -1,4 +1,8 @@
-import { getByText, render as testRender } from '@testing-library/react';
+import {
+  cleanup,
+  getByText,
+  render as testRender,
+} from '@testing-library/react';
 import React, { ReactElement } from 'react';
 import { HelmetProvider } from 'react-helmet-async';
 
@@ -89,7 +93,7 @@ test('returns full array for default seo object', () => {
       content.startsWith(`${SEO.title}`),
   );
   const index = document.documentElement.querySelectorAll(
-    'meta[content="index,follow"]',
+    'meta[content="max-image-preview:large,index,follow"]',
   );
   const description = document.documentElement.querySelectorAll(
     `meta[content="${SEO.description}"]`,
@@ -244,10 +248,10 @@ test('correctly sets noindex', () => {
   };
   render(<BaseSeo {...overrideProps} />);
   const index = document.documentElement.querySelectorAll(
-    'meta[content="index,follow"]',
+    'meta[content*=",index,follow"]',
   );
   const noindex = document.documentElement.querySelectorAll(
-    'meta[content="noindex,follow"]',
+    'meta[content*=",noindex,follow"]',
   );
 
   expect(Array.from(index).length).toBe(0);
@@ -261,10 +265,10 @@ test('correctly sets nofollow', () => {
   };
   render(<BaseSeo {...overrideProps} />);
   const indexfollow = document.documentElement.querySelectorAll(
-    'meta[content="index,follow"]',
+    'meta[content*=",index,follow"]',
   );
   const indexnofollow = document.documentElement.querySelectorAll(
-    'meta[content="index,nofollow"]',
+    'meta[content*=",index,nofollow"]',
   );
 
   expect(Array.from(indexfollow).length).toBe(0);
@@ -279,14 +283,67 @@ test('correctly sets noindex, nofollow', () => {
   };
   render(<BaseSeo {...overrideProps} />);
   const indexfollow = document.documentElement.querySelectorAll(
-    'meta[content="index,follow"]',
+    'meta[content*=",index,follow"]',
   );
   const noindexnofollow = document.documentElement.querySelectorAll(
-    'meta[content="noindex,nofollow"]',
+    'meta[content*=",noindex,nofollow"]',
   );
 
   expect(Array.from(indexfollow).length).toBe(0);
   expect(Array.from(noindexnofollow).length).toBe(2);
+});
+
+test('correctly sets maxImagePreview', () => {
+  // 'large'
+  const defaultProps = {
+    ...SEO,
+    maxImagePreview: 'large' as const,
+  };
+  render(<BaseSeo {...defaultProps} />);
+
+  const defaultMetaTags = document.documentElement.querySelectorAll(
+    'meta[content*="max-image-preview:large"]',
+  );
+  expect(Array.from(defaultMetaTags).length).toBeGreaterThan(0);
+
+  cleanup();
+
+  // 'none'
+  const customProps = {
+    ...SEO,
+    maxImagePreview: 'none' as const,
+  };
+  render(<BaseSeo {...customProps} />);
+
+  const noneMetaTags = document.documentElement.querySelectorAll(
+    'meta[content*="max-image-preview:none"]',
+  );
+  const largeMetaTagsNone = document.documentElement.querySelectorAll(
+    'meta[content*="max-image-preview:large"]',
+  );
+
+  expect(Array.from(noneMetaTags).length).toBeGreaterThan(0);
+  expect(Array.from(largeMetaTagsNone).length).toBe(0);
+
+  cleanup();
+
+  // 'standard'
+  const standardProps = {
+    ...SEO,
+    maxImagePreview: 'standard' as const,
+  };
+  render(<BaseSeo {...standardProps} />);
+
+  const standardMetaTags = document.documentElement.querySelectorAll(
+    'meta[content*="max-image-preview:standard"]',
+  );
+
+  const largeMetaTagsStandard = document.documentElement.querySelectorAll(
+    'meta[content*="max-image-preview:large"]',
+  );
+
+  expect(Array.from(standardMetaTags).length).toBeGreaterThan(0);
+  expect(Array.from(largeMetaTagsStandard).length).toBe(0);
 });
 
 test('displays title with titleTemplate integrated', () => {
@@ -819,10 +876,10 @@ test('correctly sets noindex default', () => {
   };
   render(<BaseSeo {...overrideProps} />);
   const indexfollow = document.documentElement.querySelectorAll(
-    'meta[content="index,follow"]',
+    'meta[content*=",index,follow"]',
   );
   const noindexfollow = document.documentElement.querySelectorAll(
-    'meta[content="noindex,follow"]',
+    'meta[content*=",noindex,follow"]',
   );
 
   expect(Array.from(indexfollow).length).toBe(0);
@@ -835,10 +892,10 @@ test('correctly sets nofollow default', () => {
   };
   render(<BaseSeo {...overrideProps} />);
   const indexfollow = document.documentElement.querySelectorAll(
-    'meta[content="index,follow"]',
+    'meta[content*=",index,follow"]',
   );
   const indexnofollow = document.documentElement.querySelectorAll(
-    'meta[content="index,nofollow"]',
+    'meta[content*=",index,nofollow"]',
   );
 
   expect(Array.from(indexfollow).length).toBe(0);
@@ -853,10 +910,10 @@ test('correctly read noindex & nofollow false', () => {
   };
   render(<BaseSeo {...overrideProps} />);
   const indexfollow = document.documentElement.querySelectorAll(
-    'meta[content="index,follow"]',
+    'meta[content*=",index,follow"]',
   );
   const noindexnofollow = document.documentElement.querySelectorAll(
-    'meta[content="noindex,nofollow"]',
+    'meta[content*=",noindex,nofollow"]',
   );
 
   expect(Array.from(indexfollow).length).toBe(2);

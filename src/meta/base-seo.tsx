@@ -6,6 +6,7 @@ import { AllSeoProps, LinkProps, MetaProps } from '../types';
 const BASE_DEFAULTS = {
   noindex: false,
   nofollow: false,
+  maxImagePreview: 'large',
   defaultOpenGraphImageWidth: 0,
   defaultOpenGraphImageHeight: 0,
   defaultOpenGraphVideoWidth: 0,
@@ -62,8 +63,10 @@ export const BaseSeo = ({
     (props.nofollow ?? DEFAULTS.nofollow) ||
     props.dangerouslySetAllPagesToNoFollow;
 
+  const maxImagePreview = props.maxImagePreview ?? DEFAULTS.maxImagePreview;
+
   const indexTags = ['robots', 'googlebot'];
-  if (noindex || nofollow) {
+  if (noindex || nofollow || maxImagePreview) {
     if (props.dangerouslySetAllPagesToNoIndex) {
       DEFAULTS.noindex = true;
     }
@@ -74,14 +77,14 @@ export const BaseSeo = ({
     for (const name of indexTags) {
       meta.push({
         name,
-        content: `${noindex ? 'noindex' : 'index'},${
-          nofollow ? 'nofollow' : 'follow'
-        }`,
+        content: `max-image-preview:${maxImagePreview},${
+          noindex ? 'noindex' : 'index'
+        },${nofollow ? 'nofollow' : 'follow'}`,
       });
     }
   } else {
     for (const name of indexTags) {
-      meta.push({ name, content: 'index,follow' });
+      meta.push({ name, content: 'max-image-preview:large,index,follow' });
     }
   }
 
