@@ -8,16 +8,16 @@
     "seo",
     "ssr"
   ],
-  "homepage": "https://github.com/ifiokjr/gatsby-plugin-next-seo#readme",
+  "homepage": "https://github.com/onSERP/gatsby-plugin-next-seo#readme",
   "bugs": {
-    "url": "https://github.com/ifiokjr/gatsby-plugin-next-seo/issues"
+    "url": "https://github.com/onSERP/gatsby-plugin-next-seo/issues"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/ifiokjr/gatsby-plugin-next-seo.git"
+    "url": "git+https://github.com/onSERP/gatsby-plugin-next-seo.git"
   },
   "license": "MIT",
-  "author": "Ifiok Jr. <ifiokotung@gmail.com>",
+  "author": "Gustavo Rocha <gustavo@onserp.com.br>",
   "main": "lib/index.js",
   "files": [
     "gatsby-browser.js",
