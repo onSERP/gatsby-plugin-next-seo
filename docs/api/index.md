@@ -8,5 +8,5 @@
 
 |  Package | Description |
 |  --- | --- |
-|  [gatsby-plugin-next-seo](./gatsby-plugin-next-seo.md) |  |
+|  [@onserp/gatsby-plugin-next-seo](./gatsby-plugin-next-seo.md) |  |
 
