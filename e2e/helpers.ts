@@ -1,8 +1,16 @@
-import { getDocument } from 'pptr-testing-library';
 import { ElementHandle, Page } from 'puppeteer';
 
 export const url = (path = '') => `http://localhost:9000${path}`;
 
+// implementation of getDocument as in pptr-testing-library
+export async function getDocument(page: Page): Promise<ElementHandle> {
+  const documentHandle = await page.mainFrame().evaluateHandle('document');
+  const document = documentHandle.asElement();
+  if (!document) {
+    throw new Error('Could not find document');
+  }
+  return document;
+}
 export const prop = async <GReturn>(
   $element: ElementHandle | Promise<ElementHandle>,
   property: string,
